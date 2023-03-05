@@ -88,13 +88,13 @@
             <div class="row align-items-center">
 
               <div class="col">
-                <input type="number" id="typeNumber" class="form-control col" placeholder="dd"/>
+                <input type="number" min="1" max="28" id="typeNumber" class="form-control col" placeholder="dd"/>
               </div>
               <div class="col">
-                <input type="number" id="typeNumber" class="form-control col " placeholder="mm" />
+                <input type="number" min="1" max="12" id="typeNumber" class="form-control col " placeholder="mm" />
               </div>
               <div class="col">
-                <input type="number" id="typeNumber" class="form-control col " placeholder="yy" />
+                <input type="number" min="1900" max="2023" id="typeNumber" class="form-control col " placeholder="yy" />
               </div>
 
             </div>
