@@ -11,22 +11,24 @@
     <title>Document</title>
 
   
+    <header>
 
-<header>
-
-  <!-- NAVBAR -->
-  <nav class="navbar bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand">Logo</a>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-sm" type="submit">Search</button>
-      </form>
-      <button class="btn custombtn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Login</button>
+<!-- NAVBAR -->
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand me-auto" href="/" >Logo</a>
+      <a class="btn me-3" type="button" href="{{ route('newspage') }}" >News</a>
     </div>
-  </nav>
+    <form class="d-flex justify-content-center" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-sm" type="submit">Search</button>
+    </form>
+    <button class="btn ms-3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Login</button>
+  </div>
+</nav>
 
-  </header>
+</header>
 
 
 <!-- Modal LOGIN -->
