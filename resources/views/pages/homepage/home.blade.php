@@ -6,62 +6,12 @@
 </div>
 
 <div class="container text-center">
-  <div class="row">
-    <div class="col">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">Card with stretched link</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">Card with stretched link</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">Card with stretched link</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">Card with stretched link</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">Card with stretched link</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-
+@foreach ($categories as $category)
+    <a href="#" src="{{asset('images/'.  $category->img)}}" style="background-image: url({{asset('images/'.  $category->img)}}); background-size: 280px;
+            background-repeat: no-repeat;
+            background-position: center; padding: 20px 40px; font-size: 50px; border-radius: 20px; object-fit: cover" class="btn btn-dark">{{$category->name}}</a>
+@endforeach
+    
     <div class="container text-center">
         <h2>Content</h2>
     </div>

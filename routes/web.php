@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages\homepage\home');
+Route::get('/', [CategoryController::class, 'index'], function () {
+    return view('pages.homepage.home');
 });
 
 
+
 Route::get('/news', function () {
-    return view('pages\newspage\news');
+    return view('pages.newspage.news');
 })->name('newspage');
