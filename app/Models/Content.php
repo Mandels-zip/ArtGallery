@@ -17,7 +17,7 @@ class Content extends Model
         'description',
         'categoryId',
         'agelimit',
-        'UserId',
+        'userId',
     	'create_date'
     ];
 

@@ -18,9 +18,11 @@
 
    <div class="container text-center">
   <div class="row">
-    <div class="col">
-    <img src="..." class="img-fluid" alt="Responsive image">
+
+    <div clss="col">
+    <img src="" class="img-fluid" alt="Responsive image">
     </div>
+
     <div class="col">
     <img src="..." class="img-fluid" alt="Responsive image">
     </div>

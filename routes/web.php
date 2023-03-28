@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContentController;
+use Symfony\Component\Mime\Encoder\ContentEncoderInterface;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +16,9 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', [CategoryController::class, 'index'], function () {
+Route::get('/' ,[ CategoryController::class, 'index']  , function () {
     return view('pages.homepage.home');
 });
-
-
 
 Route::get('/news', function () {
     return view('pages.newspage.news');

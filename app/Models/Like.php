@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Like extends Model
 {
     use HasFactory;
+    protected $table = 'liked';
+    public $timestamps = true;
+
+    protected $fillable =[
+    	'contentId',
+        'UserId',
+    ];
 }
