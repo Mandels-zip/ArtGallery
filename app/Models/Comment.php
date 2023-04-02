@@ -16,4 +16,16 @@ class Comment extends Model
         'body',
         'contentId'
     ];
+
+    public function user()
+    {
+    	return $this->belongsTo('App\Models\User', 'userId');
+    }
+
+    public function content()
+    {
+    	return $this->belongsTo('App\Models\Content', 'contentId');
+    }
+
+
 }

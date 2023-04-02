@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\HomeController;
 use Symfony\Component\Mime\Encoder\ContentEncoderInterface;
 
 /*
@@ -16,9 +17,12 @@ use Symfony\Component\Mime\Encoder\ContentEncoderInterface;
 |
 */
 
-Route::get('/' ,[ CategoryController::class, 'index']  , function () {
-    return view('pages.homepage.home');
-});
+Route::get('/' ,[HomeController::class, 'index']);
+
+Route::resources([
+    'content' => 'ContentController',
+    'categories' => 'CategoryController'
+]);
 
 Route::get('/news', function () {
     return view('pages.newspage.news');

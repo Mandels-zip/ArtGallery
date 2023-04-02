@@ -22,7 +22,6 @@ class User extends Authenticatable
     protected $fillable = [
         'nickname',
         'password',
-        'roleId',
         'email',
         'avatar',
     ];
@@ -53,10 +52,6 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany('App\Models\Comment');
-    }
-    public function role()
-    {
-    	return $this->belongsTo('App\Models\Role', 'roleId');
     }
 
 }

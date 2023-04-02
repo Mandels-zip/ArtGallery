@@ -30,10 +30,14 @@ class Content extends Model
     {
     	return $this->belongsTo('App\Models\User', 'userId');
     }
-    public function comments()
+    public function comment()
     {
         return $this->hasMany('App\Models\Comment');
     }
 
+    public function like()
+    {
+        return $this->hasMany('App\Models\Like');
+    }
 }
 

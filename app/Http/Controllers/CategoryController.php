@@ -9,7 +9,7 @@ class CategoryController extends Controller
     public function index()
     {
     $categories = Category::orderby('name', 'asc')->get();
-    return view('pages.homepage.home', compact('categories'));
+    return $categories;
    }
 
 }

@@ -6,12 +6,25 @@
 </div>
 
 <div class="container text-center">
-@foreach ($categories as $category)
-    <a href="#" src="{{asset('images/'.  $category->img)}}" style="background-image: url({{asset('images/'.  $category->img)}}); background-size: 280px;
-            background-repeat: no-repeat;
-            background-position: center; padding: 20px 40px; font-size: 50px; border-radius: 20px; object-fit: cover" class="btn btn-dark">{{$category->name}}</a>
-@endforeach
-    
+
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+  @foreach ($categories as $category)
+  <div class="col">
+    <div class="card h-200" style="width: 18rem, h">
+      <img src="{{asset('images/'.  $category->img)}}"  class="card-img-top"  alt="...">
+      <div class="card-body">
+      <a href="#" class="btn btn-primary">{{$category-> name}}</a>
+      </div>
+    </div>
+  </div>
+    @endforeach
+  </div>
+ 
+</div>
+
+
+
     <div class="container text-center">
         <h2>Content</h2>
     </div>
@@ -19,33 +32,12 @@
    <div class="container text-center">
   <div class="row">
 
-    <div clss="col">
-    <img src="" class="img-fluid" alt="Responsive image">
-    </div>
-
+  @foreach ($content as $cont)
     <div class="col">
-    <img src="..." class="img-fluid" alt="Responsive image">
+    <img src="{{asset('images/'.  $cont->img)}}" class="img-fluid" alt="Responsive image">
     </div>
-    <div class="col">
-    <img src="..." class="img-fluid" alt="Responsive image">
-    </div>
-    <div class="col">
-    <img src="..." class="img-fluid" alt="Responsive image">
-    </div>
-    <div class="col">
-    <img src="..." class="img-fluid" alt="Responsive image">
-    </div>
-    <div class="col">
-    <img src="..." class="img-fluid" alt="Responsive image">
-    </div>
-   
+    @endforeach
   </div>
 </div>
-
-  </div>
-</div>
-
-
-
 
 </body>
