@@ -31,8 +31,8 @@ CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `img` varchar(255) NOT NULL,
-  `created_at` date NOT NULL DEFAULT current_timestamp(),
-  `updated_at` date NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -55,8 +55,8 @@ CREATE TABLE `comments` (
   `userId` int(11) NOT NULL,
   `body` text NOT NULL,
   `contentId` int(11) NOT NULL,
-  `created_at` date NOT NULL DEFAULT current_timestamp(),
-  `updated_at` date NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -73,9 +73,9 @@ CREATE TABLE `content` (
   `categoryId` int(11) NOT NULL,
   `agelimit` tinyint(1) NOT NULL,
   `userId` int(11) NOT NULL,
-  `create_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `created_at` date NOT NULL DEFAULT current_timestamp(),
-  `updated_at` date NOT NULL DEFAULT current_timestamp()
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -83,7 +83,7 @@ CREATE TABLE `content` (
 --
 
 INSERT INTO `content` (`id`, `title`, `img`, `description`, `categoryId`, `agelimit`, `userId`, `create_date`, `created_at`, `updated_at`) VALUES
-(2, 'dimka', 'photo7.jpg', 'descr', 1, 1, 1, '2023-03-28 08:00:43', '2023-03-28', '2023-03-28'), (2,dimkaphoto7.jpg,descr,1,1,1,2023-03-28, 08:00:43, 2023-03-28, 2023-03-28);
+(2, 'dimka', 'photo7.jpg', 'descr', 1, 1, 1, '2023-03-28 08:00:43', '2023-03-28 00:00:00', '2023-03-28 00:00:00'), (3,'dimka','photo7.jpg,','descr',1,1,1,'2023-03-28 08:00:43', '2023-03-28 00:00:00', '2023-03-28 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -95,8 +95,8 @@ CREATE TABLE `liked` (
   `id` int(11) NOT NULL,
   `contentId` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
-  `created_at` date NOT NULL DEFAULT current_timestamp(),
-  `updated_at` date NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -110,9 +110,9 @@ CREATE TABLE `news` (
   `title` varchar(255) NOT NULL,
   `text` text NOT NULL,
   `img` varchar(60) DEFAULT NULL,
-  `post_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `created_at` date NOT NULL DEFAULT current_timestamp(),
-  `updated_at` date NOT NULL DEFAULT current_timestamp()
+  `post_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -128,8 +128,8 @@ CREATE TABLE `users` (
   `role` varchar(10) NOT NULL,
   `email` varchar(255) NOT NULL,
   `avatar` varchar(255) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
-  `created_at` date NOT NULL DEFAULT current_timestamp(),
-  `updated_at` date DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
