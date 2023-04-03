@@ -18,7 +18,7 @@
   <div class="container-fluid">
     <div class="d-flex align-items-center">
       <a class="navbar-brand me-auto" href="/" >Logo</a>
-      <a class="btn me-3" type="button" href="{{ route('newspage') }}" >News</a>
+      <a class="btn me-3" type="button" href="/news" >News</a>
     </div>
     <form class="d-flex justify-content-center" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

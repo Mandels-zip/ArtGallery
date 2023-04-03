@@ -34,7 +34,7 @@
 
   @foreach ($content as $cont)
     <div class="col">
-    <img src="{{asset('images/'.  $cont->img)}}" class="img-fluid" alt="Responsive image">
+    <a href="{{route('content.details', ['id' => $cont->id]) }}"><img src="{{asset('images/'.  $cont->img)}}" class="img-fluid" alt="Responsive image"></a>
     </div>
     @endforeach
   </div>

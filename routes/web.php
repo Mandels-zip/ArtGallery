@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsController;
 use Symfony\Component\Mime\Encoder\ContentEncoderInterface;
 
 /*
@@ -17,13 +18,7 @@ use Symfony\Component\Mime\Encoder\ContentEncoderInterface;
 |
 */
 
-Route::get('/' ,[HomeController::class, 'index']);
-
-Route::resources([
-    'content' => 'ContentController',
-    'categories' => 'CategoryController'
-]);
-
-Route::get('/news', function () {
-    return view('pages.newspage.news');
-})->name('newspage');
+Route::get('/', [HomeController::class, 'index']) -> name('home');
+Route::get('/news',[NewsController::class, 'index'])->name('news');
+Route::get('/article/{news}',[NewsController::class, 'article'])-> name('news.article');
+Route::get('/details/{id}',[ContentController::class, 'contentDetail']) ->name('content.details');
