@@ -14,7 +14,7 @@
     <div class="card h-200" style="width: 18rem, h">
       <img src="{{asset('images/'.  $category->img)}}"  class="card-img-top"  alt="...">
       <div class="card-body">
-      <a href="#" class="btn btn-primary">{{$category-> name}}</a>
+      <a href="{{route('sort.category', ['categoryId' => $category->id]) }}" class="btn btn-primary">{{$category-> name}}</a>
       </div>
     </div>
   </div>
