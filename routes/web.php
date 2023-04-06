@@ -27,3 +27,8 @@ Route::resources([
 Route::get('/news', function () {
     return view('pages.newspage.news');
 })->name('newspage');
+
+
+Route::get('/author', function () {
+    return view('pages.authorpage.author');
+})->name('authorpage');
