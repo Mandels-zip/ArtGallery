@@ -5,7 +5,7 @@
       <h2>Category {{ $categoryName}} </h2>
         @foreach ($content as $cont)
         <ul class="list-group col-12"  >
-          <li class="list-group-item"> {{$cont-> title}}
+          <li class="list-group-item"> {{$cont->title}}
           </li>
           @endforeach
       </div>

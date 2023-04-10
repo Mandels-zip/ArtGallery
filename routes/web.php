@@ -6,6 +6,7 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Mime\Encoder\ContentEncoderInterface;
 
 /*
@@ -21,11 +22,8 @@ use Symfony\Component\Mime\Encoder\ContentEncoderInterface;
 
 Route::get('/', [HomeController::class, 'index']) -> name('home');
 Route::get('/news',[NewsController::class, 'index'])->name('news');
-Route::get('/article/{news}',[NewsController::class, 'article'])-> name('news.article');
 Route::get('/details/{id}',[ContentController::class, 'contentDetail']) ->name('content.details');
 Route::get('/category/{categoryId}',[CategoryController::class, 'sortByCategory']) ->name('sort.category');
 Route::post('/login', [AuthController::class, 'authenticate']) -> name('login');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth']);
+Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
+Route::get('/article/{news}',[NewsController::class, 'article'])-> name('news.article');

@@ -25,13 +25,15 @@
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-sm" type="submit">Search</button>
     </form>
-    @guest
-    <a class="btn ms-3" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+
+    @if(Auth::check())
+    <form method="POST" action="{{ route('logout')}}">
+    @csrf
+      <button type="submit" class="btn ms-3">Logout {{ Auth::user()->nickname }}</button>
+    </form>
     @else
-    <li class="nav-item">
-            <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
-        </li>
-    @endguest
+    <a class="btn ms-3" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+    @endif
   </div>
 </nav>
 

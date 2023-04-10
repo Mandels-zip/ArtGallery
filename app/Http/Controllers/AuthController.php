@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface;
 
 class AuthController extends Controller
 {
@@ -14,18 +15,17 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
     // Debugging statement
-
     if(Auth::attempt($credentials)){
-        $request->session()->regenerate();
         // Debugging statement
-        dd('User authenticated!');
-        return redirect()->intended('/');
+        return redirect()->route('home');
     }
     // Debugging statement
-    dd('Authentication failed!');
     return redirect()->intended('error');
-
-       
 }
+
+    public function logout(Request $request) {
+        Auth::logout();
+        return redirect('/');
+    }
 
 }
