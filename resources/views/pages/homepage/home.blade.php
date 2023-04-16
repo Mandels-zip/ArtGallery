@@ -12,7 +12,7 @@
   @foreach ($categories as $category)
   <div class="col">
     <div class="card h-200" style="width: 18rem, h">
-      <img src="{{asset('images/'.  $category->img)}}"  class="card-img-top"  alt="...">
+      <img src="{{ asset('storage/images/categoryimg/'.$category->img)}}" class="card-img-top"  alt="...">
       <div class="card-body">
       <a href="{{route('sort.category', ['categoryId' => $category->id]) }}" class="btn btn-primary">{{$category->name}}</a>
       </div>
@@ -34,7 +34,7 @@
 
   @foreach ($content as $cont)
     <div class="col">
-    <a href="{{route('content.details', ['id' => $cont->id]) }}"><img src="{{asset('images/'.  $cont->img)}}" class="img-fluid" alt="Responsive image"></a>
+    <a href="{{route('content.details', ['id' => $cont->id]) }}"><img src="{{asset('storage/images/contentimg/'.$cont->img)}}" class="img-fluid" alt="Responsive image"></a>
     </div>
     @endforeach
   </div>

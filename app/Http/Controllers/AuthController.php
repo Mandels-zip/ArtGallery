@@ -19,8 +19,9 @@ class AuthController extends Controller
         // Debugging statement
         return redirect()->route('home');
     }
-    // Debugging statement
-    return redirect()->intended('error');
+    return back()->withErrors([
+        'login_password' => 'The provided credentials do not match our records.',
+    ]);
 }
 
     public function logout(Request $request) {

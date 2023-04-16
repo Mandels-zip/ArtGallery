@@ -24,7 +24,9 @@ class CheckRole
                     return $next($request);
                 }
             }
-       }
+       }elseif(!Auth::check()) {
+        return redirect()->route('home');
+    }
        abort(403, 'Invalid role');
     }
 }

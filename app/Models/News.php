@@ -15,6 +15,13 @@ class News extends Model
     	'title',
         'text',
         'img',
-        'post_date'
+        'post_date',
+        'userId'
     ];
+
+
+    public function user()
+    {
+    	return $this->belongsTo('App\Models\User', 'userId');
+    }
 }

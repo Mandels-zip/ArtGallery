@@ -4,14 +4,26 @@
 <body>
       <div class="col-md-4">
         <h2>Recent News</h2>
-        @foreach ($news as $new)
-        <ul class="list-group col-12"  >
-          <li class="list-group-item"><a href="{{route('news.article', ['news' => $new->id]) }}">{{$new -> title}} 
-           
-          @if(Auth::check() AND Auth::user()->role == 'admin')
-          </a> <a href="" type="button"> Delete </a></li>
-          @endif
-        @endforeach
+    
+        @if(Auth::check() &&(Auth::user()->role == 'admin' ||  Auth::user()->role == 'moderator' ))
+          </a> <a href="{{route('news.create')}}" type="button" class="btn btn-success" > create </a></li>
+        @endif
+
+
+        @foreach ($news as $article)
+  <ul class="list-group col-12">
+    <li class="list-group-item">
+      <a href="{{route('news.article', ['news' => $article->id]) }}">{{$article -> title}}</a>
+      @if(Auth::check() &&(Auth::user()->role == 'admin' ||  Auth::user()->role == 'moderator' ))
+        <form action="{{ route('news.destroy', $article->id) }}" method="POST">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-outline-danger"> Delete </button> 
+        </form>
+      @endif
+    </li>
+  </ul>
+@endforeach
         
       </div>
 </body>
