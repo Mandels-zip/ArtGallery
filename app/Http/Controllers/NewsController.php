@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\News;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -16,4 +17,48 @@ class NewsController extends Controller
     public function article(News $news){
         return view('pages.newspage.article', compact('news'));
     }
+
+
+    public function store(Request $request){
+
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'text' => 'required',
+            'img' => 'required|image|mimes:jpeg,png,jpg|max:3072'
+         ]);
+
+         $user = Auth::user();
+         $post_date = now();
+
+         $news = new News();
+
+         $news->title = $validatedData['title'];
+         $news->text = $validatedData['text'];
+         $news->post_date = $post_date;
+         $news->UserId = $user->id;
+        
+            $filename = time() . '_' . $request->file('img')->getClientOriginalName();
+            $request->file('img')->storeAs('public/images/newsimg', $filename);
+            $news->img = $filename;
+            
+
+            $news->save();
+
+            return redirect()->route('news')->with('success', 'News created successfully.');
+    }
+    public function destroy($id){
+
+        $news = News::find($id);
+        
+        if (!$news) {
+            return redirect()->back()->with('error', 'News not found');
+        }
+
+        Storage::delete('public/images/newsimg/'.$news->img);
+        $news->delete();
+        return redirect()->route('news')->with('success', 'News deleted successfully');
+
+
+    }
+    
 }
