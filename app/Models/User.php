@@ -47,13 +47,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function photo()
+    public function content()
     {
-    	return $this->hasMany('App\Models\Content');
+    	return $this->hasMany('App\Models\Content',);
     }
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany('App\Models\Comment', 'userId');
     }
+
+    public function liked()
+    {
+        return $this->hasMany('App\Models\Like', 'UserId');
+    }
+
 
 }

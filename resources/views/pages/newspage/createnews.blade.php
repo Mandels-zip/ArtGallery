@@ -18,7 +18,7 @@
     <div class="col-md-6">
       <div class="mb-3">
         <label for="img" class="form-label">Image:</label>
-        <input type="file" class="form-control" name="img" id="img" required>
+        <input type="file" class="form-control" name="img" id="img" accept=".jpep,.png,.jpg" required>
         @error('img')
         {{ $message }}
         @enderror

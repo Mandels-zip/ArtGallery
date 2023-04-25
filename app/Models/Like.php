@@ -18,7 +18,7 @@ class Like extends Model
 
     public function user()
     {
-    	return $this->belongsTo('App\Models\User', 'userId');
+    	return $this->belongsTo('App\Models\User', 'UserId');
     }
 
     public function content()

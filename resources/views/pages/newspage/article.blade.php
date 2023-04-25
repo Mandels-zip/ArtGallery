@@ -12,6 +12,8 @@
           @csrf
             @method('DELETE')
            <button type="submit" class="btn btn-outline-danger"> Delete </button> 
+          </form>
+          <a href="{{route('news.edit', $news->id)}}" type="button" class="btn btn-outline-warning" > Edit</a>
           @endif
          
           </div>

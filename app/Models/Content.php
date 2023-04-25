@@ -32,12 +32,12 @@ class Content extends Model
     }
     public function comment()
     {
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany('App\Models\Comment', "contentId");
     }
 
     public function like()
     {
-        return $this->hasMany('App\Models\Like');
+        return $this->hasMany('App\Models\Like', "contentId");
     }
 }
 

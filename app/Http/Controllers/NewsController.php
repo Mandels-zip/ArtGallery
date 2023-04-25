@@ -46,6 +46,7 @@ class NewsController extends Controller
 
             return redirect()->route('news')->with('success', 'News created successfully.');
     }
+
     public function destroy($id){
 
         $news = News::find($id);
@@ -59,6 +60,45 @@ class NewsController extends Controller
         return redirect()->route('news')->with('success', 'News deleted successfully');
 
 
+    }
+
+    public function edit(News $news){
+        return view('pages.newspage.editarticle', compact('news'));
+    }
+
+    public function update(Request $request, $id){
+
+        $news = News::find($id);
+        if (Auth::user()->id === $news->userId || Auth::user()->role === 'admin') {
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'text' => 'required',
+            'img' => 'required|image|mimes:jpeg,png,jpg|max:3072'
+         ]);
+        
+         $user = Auth::user();
+
+
+         if (!$news) {
+            return back()->with('error', 'News article not found.');
+        }
+
+         $news->title = $validatedData['title'];
+         $news->text = $validatedData['text'];
+         $news->UserId = $user->id;
+
+         Storage::delete('public/images/newsimg/' . $news->img);
+            $filename = time() . '_' . $request->file('img')->getClientOriginalName();
+            $request->file('img')->storeAs('public/images/newsimg', $filename);
+            $news->img = $filename;
+            
+            $news->save();
+
+            return redirect()->route('news.article', ['news' => $news->id])->with('success', 'News article updated successfully.');
+
+    } else {
+        return redirect()->route('news')->with('error', 'You do not have permission to update this news article.');
+    }
     }
     
 }
