@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Content extends Model
 {
@@ -38,6 +39,14 @@ class Content extends Model
     public function like()
     {
         return $this->hasMany('App\Models\Like', "contentId");
+    }
+
+    public function scopeAllowedForUser(Builder $query, $user)
+    {
+        if ($user && $user->enable_explicit) {
+            return $query;
+        }
+        return $query->where('agelimit', 0);
     }
 }
 
