@@ -10,14 +10,13 @@ class NewsController extends Controller
 {
     public function index()
     {
-    $news = News::orderby('created_at', 'asc')->get();
+    $news = News::latest('post_date')->get();
     return view('pages.newspage.news', compact('news'));
     }
 
     public function article(News $news){
         return view('pages.newspage.article', compact('news'));
     }
-
 
     public function store(Request $request){
 

@@ -19,12 +19,13 @@
 <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
     <div class="d-flex align-items-center">
-      <a class="navbar-brand me-auto" href="/" >Logo</a>
+      <a class="navbar-brand me-auto" href="/" >Home</a>
       <a class="btn me-3" type="button" href="/news" >News</a>
     </div>
     <form class="d-flex justify-content-center" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-sm" type="submit">Search</button>
+      <a class="btn me-3" type="button" href="/dashboard" >dashboard</a>
     </form>
     @guest
     <a class="btn ms-3" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>

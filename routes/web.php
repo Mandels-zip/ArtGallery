@@ -27,8 +27,11 @@ Route::get('/login')->middleware('role');
 
 //FOR EVERYONE
 Route::get('/', [HomeController::class, 'index']) -> name('home');
+Route::get('/dashboard', function() {
+    return view('dashboard');
+})-> name('dashboard');
 Route::get('/news',[NewsController::class, 'index'])->name('news');
-Route::get('/details/{id}',[ContentController::class, 'contentDetail']) ->name('content.details');
+Route::get('/details/{id}',[ContentController::class, 'contentDetail']) ->name('content.details') -> middleware('check.explicit');
 Route::get('/category/{categoryId}',[CategoryController::class, 'sortByCategory']) ->name('sort.category');
 Route::get('/article/{news}',[NewsController::class, 'article'])-> name('news.article');
 
@@ -37,6 +40,7 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/register', [UserController::class, 'register'])->name('register');
     Route::post('/login', [AuthController::class, 'authenticate']) -> name('login');
 });
+
 // FOR ONLY AUTH USERS
 Route::group(['middleware' => ['auth', 'role:admin,moderator,user']], function () {
 
@@ -44,18 +48,29 @@ Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
 Route::post('/like/{contentId}', [LikeController::class, 'create' ])->name('like.create'); 
 Route::delete('/like/delete/{contentId}', [LikeController::class, 'destroy' ])->name('like.destroy'); 
 Route::post('/comment/{contentId}', [CommentController::class, 'create']) ->name('comment.create');
+
 });
 
 //FOR ADMIN/MODERATORS ONLY
 Route::group(['middleware' => ['auth', 'role:admin,moderator']], function () {
+
     //Create news
     Route::get('/news/create', function () {
         return view('pages.newspage.createnews');})->name('news.create');
     Route::post('/news', [NewsController::class, 'store']) ->name('news.store');
+
     //edit news
     Route::get('/news/edit/{news}', [NewsController::class, 'edit'])->name('news.edit');
     Route::put('/news/edit/{news}', [NewsController::class, 'update']) ->name('news.update');
+
     //delete news
     Route::delete('/news/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
     
+});
+
+//FOR ADMIN ONLY
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/categories/create', [CategoryController::class, 'create'])-> name('category.create');
+    Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
 });

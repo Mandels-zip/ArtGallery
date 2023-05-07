@@ -3,11 +3,12 @@
 
 <div class="container text-center">
 <h1>Topics</h1>
+@if(Auth::check() &&(Auth::user()->role == 'admin'))
+          <a href="{{route('category.create')}}" type="button" class="btn btn-success" > Create </a></li>
+@endif
 </div>
 
 <div class="container text-center">
-
-
   <div class="row row-cols-1 row-cols-md-3 g-4">
   @foreach ($categories as $category)
   <div class="col">

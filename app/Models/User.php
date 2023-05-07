@@ -25,7 +25,8 @@ class User extends Authenticatable
         'role',
         'email',
         'avatar',
-        'date_of_birth'
+        'date_of_birth',
+        'enable_explicit'
     ];
 
     /**
@@ -49,7 +50,7 @@ class User extends Authenticatable
 
     public function content()
     {
-    	return $this->hasMany('App\Models\Content',);
+    	return $this->hasMany('App\Models\Content');
     }
     public function comments()
     {

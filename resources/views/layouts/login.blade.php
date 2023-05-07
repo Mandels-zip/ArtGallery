@@ -37,7 +37,6 @@
 </div>
 
 
-
 <script>
   $('#login-modal').on('shown.bs.modal', function () {
     $(function() {
