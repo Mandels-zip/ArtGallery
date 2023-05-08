@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1
--- Время создания: Апр 16 2023 г., 21:23
--- Версия сервера: 10.4.25-MariaDB
--- Версия PHP: 8.1.10
+-- Host: 127.0.0.1
+-- Generation Time: May 08, 2023 at 02:01 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `artgallerybd`
+-- Database: `artgallerybd`
 --
+CREATE DATABASE IF NOT EXISTS `artgallerybd` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `artgallerybd`;
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `category`
+-- Table structure for table `category`
 --
 
 CREATE TABLE `category` (
@@ -36,7 +38,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `category`
+-- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `img`, `created_at`, `updated_at`) VALUES
@@ -47,7 +49,7 @@ INSERT INTO `category` (`id`, `name`, `img`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `comments`
+-- Table structure for table `comments`
 --
 
 CREATE TABLE `comments` (
@@ -62,7 +64,7 @@ CREATE TABLE `comments` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `content`
+-- Table structure for table `content`
 --
 
 CREATE TABLE `content` (
@@ -79,18 +81,18 @@ CREATE TABLE `content` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `content`
+-- Dumping data for table `content`
 --
 
 INSERT INTO `content` (`id`, `title`, `img`, `description`, `categoryId`, `agelimit`, `userId`, `create_date`, `created_at`, `updated_at`) VALUES
-(1, 'aaa', 'photo.jpg', 'asdasdasasd', 1, 1, 1, '2023-04-01 16:01:31', '2023-04-01', '2023-04-01'),
-(2, 'dimka', 'photo7.jpg', 'descr', 1, 1, 1, '2023-03-28 05:00:43', '2023-03-28', '2023-03-28'),
-(3, 'pic3', 'photo6.jpg', 'sdsadfsdfsdfsdfsdf', 3, 0, 1, '2023-04-04 12:54:00', '2023-04-04', '2023-04-04');
+(1, 'Title', 'photo.jpg', 'description for pic 1', 1, 1, 3, '2023-05-07 15:23:59', '2023-05-07', '2023-05-07'),
+(2, 'Best pic', 'photo6.jpg', 'Described pic', 3, 0, 2, '2023-05-07 15:25:07', '2023-05-07', '2023-05-07'),
+(3, 'Title 3', 'photo7.jpg', 'description', 2, 0, 1, '2023-05-07 15:25:50', '2023-05-07', '2023-05-07');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `liked`
+-- Table structure for table `liked`
 --
 
 CREATE TABLE `liked` (
@@ -104,7 +106,7 @@ CREATE TABLE `liked` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `news`
+-- Table structure for table `news`
 --
 
 CREATE TABLE `news` (
@@ -119,16 +121,17 @@ CREATE TABLE `news` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `news`
+-- Dumping data for table `news`
 --
 
 INSERT INTO `news` (`id`, `title`, `text`, `img`, `userId`, `post_date`, `created_at`, `updated_at`) VALUES
-(1, 'News 1', 'This is news example', '1681672468_4dc717efd5a1d1c6ec1c5b910e29be35.jpg', 2, '2023-04-16 16:14:28', '2023-04-16', '2023-04-16');
+(1, 'rdfdsfsdfs', 'sdfsdfsf', '1683473214_photomode_14112022_163821.png', 1, '2023-05-07 12:26:54', '2023-05-07', '2023-05-07'),
+(6, '2344', 'er', '1683473283_photomode_14112022_163821.png', 1, '2023-05-07 12:28:03', '2023-05-07', '2023-05-07');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -139,31 +142,32 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `avatar` varchar(255) CHARACTER SET utf16 COLLATE utf16_unicode_ci DEFAULT NULL,
   `date_of_birth` date NOT NULL,
+  `enable_explicit` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` date NOT NULL DEFAULT current_timestamp(),
   `updated_at` date DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `nickname`, `password`, `role`, `email`, `avatar`, `date_of_birth`, `created_at`, `updated_at`) VALUES
-(1, 'admin', '$2y$10$ZH7poyr23pLVUhvNPjPE7uJXixMybylFgrJp5tvPeiwpdlcKWLP5S', 'admin', 'admin@admin.com', '', '2000-01-01', '2023-03-28', '2023-04-09'),
-(2, 'moderator', '$2y$10$3WqQ4mSujxwitlpua6gSEerI8XGq12b6D.wtisYWT2DCMFeRKo0SO', 'moderator', 'moderator@moderator.com', NULL, '2000-01-01', '2023-04-16', '2023-04-16'),
-(3, 'user', '$2y$10$vi2ibV8BXq43PdLJOTGTmuY3baLVKobPXT6erMw1gClsHyYnv6Xda', 'user', 'user@user.com', NULL, '2000-01-01', '2023-04-16', '2023-04-16');
+INSERT INTO `users` (`id`, `nickname`, `password`, `role`, `email`, `avatar`, `date_of_birth`, `enable_explicit`, `created_at`, `updated_at`) VALUES
+(1, 'admin', '$2y$10$ZH7poyr23pLVUhvNPjPE7uJXixMybylFgrJp5tvPeiwpdlcKWLP5S', 'admin', 'admin@admin.com', '', '2000-01-01', 1, '2023-03-28', '2023-04-09'),
+(2, 'moderator', '$2y$10$3WqQ4mSujxwitlpua6gSEerI8XGq12b6D.wtisYWT2DCMFeRKo0SO', 'moderator', 'moderator@moderator.com', NULL, '2000-01-01', 1, '2023-04-16', '2023-04-16'),
+(3, 'user', '$2y$10$vi2ibV8BXq43PdLJOTGTmuY3baLVKobPXT6erMw1gClsHyYnv6Xda', 'user', 'user@user.com', NULL, '2000-01-01', 0, '2023-04-16', '2023-04-16');
 
 --
--- Индексы сохранённых таблиц
+-- Indexes for dumped tables
 --
 
 --
--- Индексы таблицы `category`
+-- Indexes for table `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `comments`
+-- Indexes for table `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
@@ -171,7 +175,7 @@ ALTER TABLE `comments`
   ADD KEY `comments_ibfk_2` (`contentId`);
 
 --
--- Индексы таблицы `content`
+-- Indexes for table `content`
 --
 ALTER TABLE `content`
   ADD PRIMARY KEY (`id`),
@@ -179,7 +183,7 @@ ALTER TABLE `content`
   ADD KEY `userId` (`userId`);
 
 --
--- Индексы таблицы `liked`
+-- Indexes for table `liked`
 --
 ALTER TABLE `liked`
   ADD PRIMARY KEY (`id`),
@@ -187,14 +191,14 @@ ALTER TABLE `liked`
   ADD KEY `UserId` (`UserId`);
 
 --
--- Индексы таблицы `news`
+-- Indexes for table `news`
 --
 ALTER TABLE `news`
   ADD PRIMARY KEY (`id`),
   ADD KEY `userId` (`userId`);
 
 --
--- Индексы таблицы `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -202,72 +206,72 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `nickname` (`nickname`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT для таблицы `category`
+-- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT для таблицы `comments`
+-- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT для таблицы `content`
+-- AUTO_INCREMENT for table `content`
 --
 ALTER TABLE `content`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT для таблицы `liked`
+-- AUTO_INCREMENT for table `liked`
 --
 ALTER TABLE `liked`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT для таблицы `news`
+-- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT для таблицы `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Ограничения внешнего ключа сохраненных таблиц
+-- Constraints for dumped tables
 --
 
 --
--- Ограничения внешнего ключа таблицы `comments`
+-- Constraints for table `comments`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`contentId`) REFERENCES `content` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `content`
+-- Constraints for table `content`
 --
 ALTER TABLE `content`
   ADD CONSTRAINT `content_ibfk_1` FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `content_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `liked`
+-- Constraints for table `liked`
 --
 ALTER TABLE `liked`
   ADD CONSTRAINT `liked_ibfk_1` FOREIGN KEY (`contentId`) REFERENCES `content` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `liked_ibfk_2` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `news`
+-- Constraints for table `news`
 --
 ALTER TABLE `news`
   ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
