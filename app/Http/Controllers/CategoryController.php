@@ -17,8 +17,13 @@ class CategoryController extends Controller
 
    public function sortByCategory($categoryId)
    {
+    $user = auth()->user();
     $category = Category::findOrFail($categoryId);
-    $content = Content::where('categoryId', $categoryId)->get();
+    if (request('search')) {
+        $content = Content::allowedForUser($user)->where('title', 'like', '%' . request('search') . '%')->where('categoryId', $categoryId)->get();
+    } else {
+        $content = Content::AllowedForUser($user)->where('categoryId', $categoryId)->get();
+    }
     return view('pages.contentpage.contentByCategory', [
         'content' => $content,
         'categoryName' => $category->name,

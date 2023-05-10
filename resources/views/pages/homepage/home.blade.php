@@ -1,6 +1,7 @@
 @include('\layouts\header')
 <body>
 
+
 <div class="container text-center">
 <h1>Topics</h1>
 @if(Auth::check() &&(Auth::user()->role == 'admin'))
@@ -23,9 +24,6 @@
   </div>
  
 </div>
-
-
-
     <div class="container text-center">
         <h2>Content</h2>
     </div>

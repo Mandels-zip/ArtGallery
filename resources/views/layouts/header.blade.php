@@ -22,21 +22,36 @@
       <a class="navbar-brand me-auto" href="/" >Home</a>
       <a class="btn me-3" type="button" href="/news" >News</a>
     </div>
-    <form class="d-flex justify-content-center" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-sm" type="submit">Search</button>
-      <a class="btn me-3" type="button" href="/dashboard" >dashboard</a>
-    </form>
+      <form>
+        <input
+          type="search"
+          class="form-control"
+          placeholder="Find content here"
+          name="search"
+          value="{{ request('search') }}">
+      </form>
+     
+
     @guest
     <a class="btn ms-3" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
     @endguest
+
     @if(Auth::check())
-    <form method="POST" action="{{ route('logout')}}">
-    @csrf
-      <button type="submit" class="btn ms-3">Logout {{ Auth::user()->nickname }}</button>
-    </form>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ Auth::user()->nickname }}
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="/dashboard">dashboard</a></li>
+        <li><form method="POST" action="{{ route('logout')}}">
+          @csrf
+        <button type="submit" class="dropdown-item" >Logout</button>
+        </form></li>
+      </ul>
+    </div>
     @endif
-  
+
+
   </div>
 </nav>
 
