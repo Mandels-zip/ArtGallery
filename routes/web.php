@@ -32,3 +32,8 @@ Route::get('/news', function () {
 Route::get('/author', function () {
     return view('pages.authorpage.author');
 })->name('authorpage');
+
+
+Route::get('/profile', function () {
+    return view('pages.selfpage.profile');
+})->name('profile');

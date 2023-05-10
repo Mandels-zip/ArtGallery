@@ -20,6 +20,7 @@
       <a class="navbar-brand me-auto" href="/" >Logo</a>
       <a class="btn me-3" type="button" href="{{ route('newspage') }}" >News</a>
       <a class="btn me-3" type="button" href="{{ route('authorpage') }}" >Author</a>
+      <a class="btn me-3" type="button" href="{{ route('profile') }}" >profile</a>
     </div>
     <form class="d-flex justify-content-center" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
