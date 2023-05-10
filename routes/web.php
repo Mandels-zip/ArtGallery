@@ -43,17 +43,15 @@ Route::middleware(['guest'])->group(function () {
 
 // FOR ONLY AUTH USERS
 Route::group(['middleware' => ['auth', 'role:admin,moderator,user']], function () {
-
 Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
 Route::post('/like/{contentId}', [LikeController::class, 'create' ])->name('like.create'); 
 Route::delete('/like/delete/{contentId}', [LikeController::class, 'destroy' ])->name('like.destroy'); 
 Route::post('/comment/{contentId}', [CommentController::class, 'create']) ->name('comment.create');
-
+Route::delete('/comment/{commentId}', [CommentController::class, 'destroy']) -> name('comment.destroy');
 });
 
 //FOR ADMIN/MODERATORS ONLY
 Route::group(['middleware' => ['auth', 'role:admin,moderator']], function () {
-
     //Create news
     Route::get('/news/create', function () {
         return view('pages.newspage.createnews');})->name('news.create');
@@ -65,7 +63,6 @@ Route::group(['middleware' => ['auth', 'role:admin,moderator']], function () {
 
     //delete news
     Route::delete('/news/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
-    
 });
 
 //FOR ADMIN ONLY

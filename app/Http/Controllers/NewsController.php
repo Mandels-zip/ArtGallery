@@ -11,6 +11,11 @@ class NewsController extends Controller
     public function index()
     {
     $news = News::latest('post_date')->get();
+    if (request('search')) {
+        $news = News::where('title', 'like', '%' . request('search') . '%')->get();
+    } else {
+         $news = News::all();
+    }
     return view('pages.newspage.news', compact('news'));
     }
 

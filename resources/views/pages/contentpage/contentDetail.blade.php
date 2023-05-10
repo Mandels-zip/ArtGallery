@@ -49,7 +49,17 @@
           <div class="card">
               <div class="card-body">
                   <p class="card-text">{{ $comment->body }}</p>
+                 
                   <p class="card-text"><small class="text-muted">Posted by {{ $comment->user->nickname }} on {{ $comment->created_at->format('F j, Y') }}</small></p>
+                 @if (Auth::check())
+                 @if ($content->comment()->where('UserId', Auth::user()->id)->exists() || Auth::user()->role == 'admin' ||  Auth::user()->role == 'moderator')
+                <form action="{{route('comment.destroy', ['commentId' => $comment->id])}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                </form>
+                @endif
+                @endif
               </div>
           </div>
           @endforeach

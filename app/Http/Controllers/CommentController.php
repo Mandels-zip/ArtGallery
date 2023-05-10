@@ -20,7 +20,18 @@ class CommentController extends Controller
         $comments -> body = $validatedData['body'];
         $comments -> contentId = $contentId;
         $comments ->save();
-        return redirect()->back()->with('success', 'You liked post.');
+        return redirect()->back()->with('success', 'You commented post.');
+    }
+
+    public function destroy($commentId){
+        $comment = Comment::FindOrFail($commentId);
+        if($comment->userId == Auth::User()->id || (Auth::User()->role == 'admin' || Auth::User()->role == 'moderator')){
+            $comment -> delete();
+            return redirect()->back()->with('success', 'You deleted comment.');
+        } else {
+            // The authenticated user is not authorized to delete the like object
+            abort(403, 'Unauthorized action.');
+        }
     }
 
 }
