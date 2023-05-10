@@ -93,6 +93,18 @@
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
+
+           <script>
+           $('#nickname').on('keypress', function (event) {
+            var regex = new RegExp("^[a-zA-Z0-9]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+              event.preventDefault();
+              return false;
+              }
+            }); 
+            </script>
+
         
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
@@ -103,6 +115,16 @@
                 </span>
             @enderror
         </div>
+
+        <script>
+       $('input[name="password"]').on('keypress', function (event) {
+          var key = String.fromCharCode(event.keyCode || event.which);
+          if (key === ' ') {
+              event.preventDefault();
+              return false;
+          }
+        });
+            </script>
 
         <div class="mb-3">
           <label for="password_confirmation">Confirm Password</label>
