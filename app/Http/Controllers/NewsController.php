@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+
 class NewsController extends Controller
 {
     public function index()
@@ -42,6 +43,7 @@ class NewsController extends Controller
          $news->UserId = $user->id;
         
             $filename = time() . '_' . $request->file('img')->getClientOriginalName();
+
             $request->file('img')->storeAs('public/images/newsimg', $filename);
             $news->img = $filename;
             

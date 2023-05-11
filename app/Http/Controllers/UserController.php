@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\Like;
+use App\Models\Content;
 
 class UserController extends Controller
 {
@@ -28,6 +32,15 @@ class UserController extends Controller
         $user->save();
 
         return redirect('/');
+    }
 
+    public function personalPage(){
+      $user = Auth::user(); 
+      $likedpost= DB::table('content')
+        ->join('liked', 'content.id', '=', 'liked.contentId')
+        ->where('liked.UserId', '=', $user->id)
+        ->get(['content.*']);
+      $createdcontent = Content::get() ->where('userId', '=', $user ->id);
+     return view ('pages.userpage.user', compact('user', 'likedpost','createdcontent'));
     }
 }

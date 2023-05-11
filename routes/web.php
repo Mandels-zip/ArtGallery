@@ -44,10 +44,10 @@ Route::middleware(['guest'])->group(function () {
 // FOR ONLY AUTH USERS
 Route::group(['middleware' => ['auth', 'role:admin,moderator,user']], function () {
 Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
-Route::post('/like/{contentId}', [LikeController::class, 'create' ])->name('like.create'); 
-Route::delete('/like/delete/{contentId}', [LikeController::class, 'destroy' ])->name('like.destroy'); 
+Route::post('/like/{contentId}', [LikeController::class, 'toggleLike' ])->name('like.toggle'); 
 Route::post('/comment/{contentId}', [CommentController::class, 'create']) ->name('comment.create');
 Route::delete('/comment/{commentId}', [CommentController::class, 'destroy']) -> name('comment.destroy');
+Route::get('personalPage', [UserController::class, 'personalPage']) -> name('personal.page');
 });
 
 //FOR ADMIN/MODERATORS ONLY

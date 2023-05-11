@@ -15,22 +15,23 @@
 
         @if (Auth::check())
           @if ($content->like()->where('UserId', Auth::user()->id)->exists())
-        <form action="{{ route('like.destroy', ['contentId' => $content->id]) }}" method="POST">
+        <form action="{{ route('like.toggle', ['contentId' => $content->id]) }}" method="POST">
           @csrf
-          @method('DELETE')
-          <button type="submit" class="btn btn-lg "> <i class="fas fa-heart fa-lg"> </i> </button>
+        
+          <button type="submit"  class="btn btn-lg like-button"> <i class="fas fa-heart fa-lg"> </i> </button>
         </form>
-
          @else(Auth::check())
          
-         <form action="{{ route('like.create', ['contentId' => $content->id]) }}" method="POST">
+         <form action="{{ route('like.toggle', ['contentId' => $content->id]) }}" method="POST">
          @csrf
-         <button type="submit" class="btn btn-lg "> <i class="far fa-heart fa-lg"> </i> </button>
+         <button type="submit"  class="btn btn-lg like-button "> <i class="far fa-heart fa-lg"> </i> </button>
         </form>
 
          @endif
         <form action="{{route ('comment.create', ['contentId' => $content->id]) }}" method="POST">
           @csrf
+      
+          
           <div class="mb-3">
           <label for="body" class="form-label">Write your review</label>
           <textarea class="form-control border auto-resize" style="height: auto; overflow: hidden; resize: none;" id="body" name="body" rows="3"></textarea>
