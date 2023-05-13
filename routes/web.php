@@ -27,9 +27,6 @@ Route::get('/login')->middleware('role');
 
 //FOR EVERYONE
 Route::get('/', [HomeController::class, 'index']) -> name('home');
-Route::get('/dashboard', function() {
-    return view('dashboard');
-})-> name('dashboard');
 Route::get('/news',[NewsController::class, 'index'])->name('news');
 Route::get('/details/{id}',[ContentController::class, 'contentDetail']) ->name('content.details') -> middleware('check.explicit');
 Route::get('/category/{categoryId}',[CategoryController::class, 'sortByCategory']) ->name('sort.category');
@@ -47,7 +44,13 @@ Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
 Route::post('/like/{contentId}', [LikeController::class, 'toggleLike' ])->name('like.toggle'); 
 Route::post('/comment/{contentId}', [CommentController::class, 'create']) ->name('comment.create');
 Route::delete('/comment/{commentId}', [CommentController::class, 'destroy']) -> name('comment.destroy');
-Route::get('personalPage', [UserController::class, 'personalPage']) -> name('personal.page');
+Route::put('/update/user', [UserController::class, 'updateProfile']) ->name('update.user');
+Route::get('/user/{nickname}', [UserController::class, 'personalPage']) -> name('user.page');
+Route::post('/create/content', [ContentController::class, 'store']) ->name('store.content');
+Route::delete('/content/delete/{contentId}', [ContentController::class, 'destroy']) ->name('destroy.content');
+Route::delete('/delete/user/{id}', [UserController::class,'destroy']) -> name('destroy.user');
+Route::get('user/settings/{nickname}', [UserController::class, 'settings']) -> name('user.settings')->middleware('checkId');
+
 });
 
 //FOR ADMIN/MODERATORS ONLY
@@ -69,5 +72,6 @@ Route::group(['middleware' => ['auth', 'role:admin,moderator']], function () {
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::get('/categories/create', [CategoryController::class, 'create'])-> name('category.create');
-    Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
+    Route::post('/categories/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::delete('/category/{id}', [CategoryController::class, 'destroy']) ->name('category.destroy');
 });

@@ -17,6 +17,13 @@
       <img src="{{ asset('storage/images/categoryimg/'.$category->img)}}" class="card-img-top"  alt="...">
       <div class="card-body">
       <a href="{{route('sort.category', ['categoryId' => $category->id]) }}" class="btn btn-primary">{{$category->name}}</a>
+      @if(Auth::Check() && Auth::user()->role == 'admin')
+        <form action="{{ route('category.destroy', $category->id, ) }}" method="POST">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="btn btn-outline-danger"> Delete Category </button> 
+        </form>
+      @endif
       </div>
     </div>
   </div>

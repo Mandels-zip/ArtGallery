@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function content()
     {
-    	return $this->hasMany('App\Models\Content');
+    	return $this->hasMany('App\Models\Content', 'userId');
     }
     public function comments()
     {

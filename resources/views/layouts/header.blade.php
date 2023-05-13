@@ -21,16 +21,18 @@
     <div class="d-flex align-items-center">
       <a class="navbar-brand me-auto" href="/" >Home</a>
       <a class="btn me-3" type="button" href="/news" >News</a>
-    </div>
+</div>
+@if($viewData['enable_search'] ?? true)
       <form>
         <input
           type="search"
           class="form-control"
-          placeholder="Find content here"
+          placeholder="Search"
           name="search"
           value="{{ request('search') }}">
       </form>
-     
+      @endif
+
 
     @guest
     <a class="btn ms-3" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
@@ -42,7 +44,7 @@
         {{ Auth::user()->nickname }}
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="{{route('personal.page') }}">dashboard</a></li>
+        <li><a class="dropdown-item" href="{{route('user.page', ['nickname' => Auth::User()->nickname])}}">dashboard</a></li>
         <li><form method="POST" action="{{ route('logout')}}">
           @csrf
         <button type="submit" class="dropdown-item" >Logout</button>

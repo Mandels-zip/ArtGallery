@@ -1,8 +1,7 @@
 @include('\layouts\header')
 
-<form method="POST" action="" enctype="multipart/form-data">
+<form method="POST" action="{{ route('category.store') }}" enctype="multipart/form-data">
   @csrf
-  
   <div class="row">
     <div class="col-md-6">
       <div class="mb-3">
@@ -12,7 +11,6 @@
       </div>
     </div>
     
-
     <div class="col-md-6">
       <div class="mb-3">
         <label for="img" class="form-label">Image:</label>

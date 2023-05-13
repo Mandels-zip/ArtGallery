@@ -16,7 +16,12 @@ class HomeController extends Controller
         } else {
              $content = Content::allowedForUser($user)->get();
         }
-        $categories = Category::orderby('name', 'asc')->get();
+
+        if (request('search')) {
+            $categories =Category::where('name', 'like', '%' . request('search') . '%')->get();
+        } else {
+            $categories = Category::orderby('name', 'asc')->get();
+        }
         return view('pages.homepage.home', compact('categories', 'content'));
     }
 }

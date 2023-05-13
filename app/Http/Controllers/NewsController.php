@@ -43,7 +43,6 @@ class NewsController extends Controller
          $news->UserId = $user->id;
         
             $filename = time() . '_' . $request->file('img')->getClientOriginalName();
-
             $request->file('img')->storeAs('public/images/newsimg', $filename);
             $news->img = $filename;
             
@@ -64,8 +63,6 @@ class NewsController extends Controller
         Storage::delete('public/images/newsimg/'.$news->img);
         $news->delete();
         return redirect()->route('news')->with('success', 'News deleted successfully');
-
-
     }
 
     public function edit(News $news){
@@ -100,10 +97,10 @@ class NewsController extends Controller
             
             $news->save();
 
-            return redirect()->route('news.article', ['news' => $news->id])->with('success', 'News article updated successfully.');
+            return redirect()->route('personal.page')->with('success', 'User updated successfully.');
 
     } else {
-        return redirect()->route('news')->with('error', 'You do not have permission to update this news article.');
+        return redirect()->route('personal.page')->with('error', 'You do not have permission to update this news article.');
     }
     }
     

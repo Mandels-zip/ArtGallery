@@ -30,8 +30,6 @@
          @endif
         <form action="{{route ('comment.create', ['contentId' => $content->id]) }}" method="POST">
           @csrf
-      
-          
           <div class="mb-3">
           <label for="body" class="form-label">Write your review</label>
           <textarea class="form-control border auto-resize" style="height: auto; overflow: hidden; resize: none;" id="body" name="body" rows="3"></textarea>
@@ -44,14 +42,22 @@
     
       </a>
           </li>
-
+          @if(Auth::check())
+           @if($content-> userId == Auth::User()->id || Auth::User()->role == 'admin' ||  Auth::user()->role == 'moderator' )
+          <form action="{{route('destroy.content', ['contentId' => $content->id])}}" method="POST">
+            @csrf
+            @method('DELETE')
+           <button type="submit" class="btn btn-outline-danger"> Delete </button> 
+          </form>
+          @endif
+          @endif
 
           @foreach ($comments as $comment)
           <div class="card">
               <div class="card-body">
                   <p class="card-text">{{ $comment->body }}</p>
                  
-                  <p class="card-text"><small class="text-muted">Posted by {{ $comment->user->nickname }} on {{ $comment->created_at->format('F j, Y') }}</small></p>
+                  <p class="card-text"><small class="text-muted">Posted by <a href="{{route('user.page', ['nickname' => $comment->user->nickname]) }}">{{ $comment->user->nickname }}</a> in {{ $comment->created_at->format('F j, Y') }}</small></p>
                  @if (Auth::check())
                  @if ($content->comment()->where('UserId', Auth::user()->id)->exists() || Auth::user()->role == 'admin' ||  Auth::user()->role == 'moderator')
                 <form action="{{route('comment.destroy', ['commentId' => $comment->id])}}" method="POST">

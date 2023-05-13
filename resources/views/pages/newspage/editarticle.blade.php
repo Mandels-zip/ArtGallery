@@ -21,7 +21,7 @@
     @if ($news->img)
         <img src="{{ asset('storage/images/newsimg/' . $news->img) }}" alt="Current image" width="150">
     @endif
-    <input type="file" class="form-control" name="img" id="img" required>
+    <input type="file" class="form-control" name="img" id="img" accept=".jpep,.png,.jpg" required>
         @error('img')
         {{ $message }}
         @enderror

@@ -51,7 +51,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect()->route('home')->with('success', 'News created successfully.');
+        return redirect()->route('home')->with('success', 'category created successfully.');
 }
 
 public function destroy($id){
@@ -64,7 +64,7 @@ public function destroy($id){
 
     Storage::delete('public/images/categoryimg/'.$category->img);
     $category->delete();
-    return redirect()->route('news')->with('success', 'Category deleted successfully');
+    return redirect()->route('home')->with('success', 'Category deleted successfully');
 }
 
 }
