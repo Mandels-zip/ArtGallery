@@ -10,10 +10,12 @@
 
 <h3 class="text-muted opacity-50">{{$user->email}}</h3>
 <div class="container mb-3 mt-3">
+@if(Auth::Check())
 @if($user->role == 'admin' and Auth::User()-> role != 'admin')
 
 @elseif($user->id == Auth::User()->id || Auth::User()->role == 'admin' ||  Auth::user()->role == 'moderator' )
 <a href="{{route('user.settings', ['nickname'=>$user->nickname]) }}" class="btn btn-danger btn-rounded btn-lg">Settings</a>
+@endif
 @endif
 </div>
 
@@ -81,7 +83,8 @@ $chunks = array_chunk($likedpost->toArray(), 2); // convert Collection to array 
       id="ex3-tabs-2"
       role="tabpanel"
       aria-labelledby="ex3-tab-2">
-      @if(Auth::User()-> nickname == $user->nickname)
+      
+      @if(Auth::Check() && Auth::User()-> nickname == $user->nickname)
       <div class="text-center">
       <a class="btn btn-danger btn-rounded btn-lg" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">Create Post</a>
       </div>

@@ -31,6 +31,7 @@ Route::get('/news',[NewsController::class, 'index'])->name('news');
 Route::get('/details/{id}',[ContentController::class, 'contentDetail']) ->name('content.details') -> middleware('check.explicit');
 Route::get('/category/{categoryId}',[CategoryController::class, 'sortByCategory']) ->name('sort.category');
 Route::get('/article/{news}',[NewsController::class, 'article'])-> name('news.article');
+Route::get('/user/{nickname}', [UserController::class, 'personalPage']) -> name('user.page');
 
 //FOR GUESTS ONLY
 Route::middleware(['guest'])->group(function () {
@@ -45,7 +46,6 @@ Route::post('/like/{contentId}', [LikeController::class, 'toggleLike' ])->name('
 Route::post('/comment/{contentId}', [CommentController::class, 'create']) ->name('comment.create');
 Route::delete('/comment/{commentId}', [CommentController::class, 'destroy']) -> name('comment.destroy');
 Route::put('/update/user', [UserController::class, 'updateProfile']) ->name('update.user');
-Route::get('/user/{nickname}', [UserController::class, 'personalPage']) -> name('user.page');
 Route::post('/create/content', [ContentController::class, 'store']) ->name('store.content');
 Route::delete('/content/delete/{contentId}', [ContentController::class, 'destroy']) ->name('destroy.content');
 Route::delete('/delete/user/{id}', [UserController::class,'destroy']) -> name('destroy.user');

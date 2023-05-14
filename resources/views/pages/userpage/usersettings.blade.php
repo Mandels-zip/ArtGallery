@@ -1,6 +1,5 @@
 @include('layouts/header')
-@if(Auth::Check())
-@if(Auth::User()-> nickname == $user->nickname)
+
 
 
 
@@ -11,6 +10,8 @@
 <div class="container">
   <div class="row">
     <div class="col text-center">
+    @if(Auth::Check())
+    @if(Auth::User()-> nickname == $user->nickname)
       <form class="d-inline-block" action="{{route('update.user')}}" enctype="multipart/form-data" method="POST">
       @csrf
       @method('PUT')
@@ -50,8 +51,6 @@
         <label class="form-check-label" for="enable_explicit">Allow the explicit content</label>
           <input class="form-check-input" value="1" type="checkbox" name="enable_explicit" id="enable_explicit" {{ $user->enable_explicit == 1 && $age >= 18 ? 'checked' : ''}}>
         </div>
-        
-    
         @error('enable_explicit')
                 <span role="alert">
                     <strong>{{ $message }}</strong>
@@ -61,24 +60,37 @@
           <button type="submit" class="btn btn-danger btn-rounded btn-lg">Save changes</button>
         </div>
       </form>
+
       @endif
+
       @if($user->id == Auth::User()->id || Auth::User()->role == 'admin' ||  Auth::user()->role == 'moderator' )
-          <form action="{{route('destroy.user', ['id' => $user->id])}}" method="POST">
+          <form class="d" action="{{route('destroy.user', ['id' => $user->id])}}" method="POST">
             @csrf
             @method('DELETE')
            <button type="submit" class="btn btn-outline-danger"> Delete Account </button>     
           </form>
           @endif
 
-@endif
+      @if(Auth::User()->role == 'admin' && $user->role != 'admin')
+      <form class="d" action="" method="POST">
+      @csrf 
+      @method('PUT')
+      <select class="form-control w-25 p-3" id="role" name="role" required>
+       @foreach($roles as $role)
+       <option value="{{$role}}">{{$role}}</option>
+       @endforeach
+      </select>
+       <button type="submit" class="btn btn-outline-danger">Change role</button>
+      </form>
+      @endif
+      
+
     </div>
   </div>
 </div>
 
-
-
-
 </div>
+@endif
 
 
 <script>

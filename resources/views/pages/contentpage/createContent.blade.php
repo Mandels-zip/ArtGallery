@@ -81,7 +81,6 @@ $(document).ready(function() {
     $('#categoryId option').filter(function() {
       return $(this).text().toLowerCase().indexOf(search) > -1;
     }).show();
-    
   });
 });
 </script>

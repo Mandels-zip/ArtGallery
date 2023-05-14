@@ -39,13 +39,17 @@ class UserController extends Controller
     public function personalPage($nickname){
     $viewData = ['enable_search' => false];
     $user = User::where('nickname', $nickname)->first(); 
+    if(!$user){
+        return redirect()->route('home')->with('User', 'No such user');
+    }
       $categories = Category::get();
       $likedpost= DB::table('content')
         ->join('liked', 'content.id', '=', 'liked.contentId')
         ->where('liked.UserId', '=', $user->id)
         ->get(['content.*']);
+
       $createdcontent = Content::get() ->where('userId', '=', $user ->id);
-     return view ('pages.userpage.user', compact('user', 'likedpost','createdcontent', 'categories', 'viewData',));
+        return view('pages.userpage.user', compact('user', 'likedpost','createdcontent', 'categories', 'viewData'));
     }
 
 
@@ -53,7 +57,12 @@ class UserController extends Controller
         $viewData = ['enable_search' => false];
         $user = User::where('nickname', $nickname)->first(); 
         $age = Carbon::parse($user->date_of_birth)->diffInYears(Carbon::now());
-         return view ('pages.userpage.usersettings', compact('user', 'viewData', 'age'));
+        $roles = array(
+            1 => 'admin',
+            2 => 'moderator',
+            3 => 'user'
+        );
+         return view ('pages.userpage.usersettings', compact('user', 'viewData', 'age', 'roles'));
         }
 
     public function updateProfile(Request $request) {
@@ -114,6 +123,15 @@ class UserController extends Controller
         // Delete the user
         $user->delete();
         return redirect()->route('home')->with('success', 'News deleted successfully');
+     }
+
+     public function changeRole(Request $request){
+
+        if(Auth::User()->role != 'admin'){
+            return redirect()->back()->with('Error', 'You have no access');
+        }
+        
+
      }
 
     }
