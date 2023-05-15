@@ -8,6 +8,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="/resources/css/general.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('resources/css/post.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/post.css') }}">
+    
     <title>Document</title>
 
   
@@ -20,7 +23,7 @@
       <a class="navbar-brand me-auto" href="/" >Logo</a>
       <a class="btn me-3" type="button" href="{{ route('newspage') }}" >News</a>
       <a class="btn me-3" type="button" href="{{ route('authorpage') }}" >Author</a>
-      <a class="btn me-3" type="button" href="{{ route('profile') }}" >profile</a>
+      <a class="btn me-3" type="button" href="{{ route('test') }}" >test</a>
     </div>
     <form class="d-flex justify-content-center" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

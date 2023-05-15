@@ -34,6 +34,6 @@ Route::get('/author', function () {
 })->name('authorpage');
 
 
-Route::get('/profile', function () {
-    return view('pages.selfpage.profile');
-})->name('profile');
+Route::get('/test', function () {
+    return view('pages.selfpage.test');
+})->name('test');
