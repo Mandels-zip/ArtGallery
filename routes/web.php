@@ -75,3 +75,28 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/categories/store', [CategoryController::class, 'store'])->name('category.store');
     Route::delete('/category/{id}', [CategoryController::class, 'destroy']) ->name('category.destroy');
 });
+
+
+Route::get('/post', function () {
+    return view('pages.postpage.post');
+})->name('post');
+
+Route::get('/post_edit', function () {
+    return view('pages.postpage.postedit');
+})->name('postedit');
+
+Route::get('/auhor_name', function () {
+    return view('pages.authorpage.author');
+})->name('author');
+
+Route::get('/auhor_edit', function () {
+    return view('pages.authorpage.author_edit');
+})->name('author_edit');
+
+Route::get('/main', function () {
+    return view('pages.mainpage.main');
+})->name('main');
+
+Route::get('/maincategory', function () {
+    return view('pages.mainpage.maincategory');
+})->name('maincategory');
