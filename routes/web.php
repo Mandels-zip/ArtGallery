@@ -98,5 +98,5 @@ Route::get('/main', function () {
 })->name('main');
 
 Route::get('/maincategory', function () {
-    return view('pages.mainpage.maincategory');
+    return view('pages.homepage.homecategory');
 })->name('maincategory');
