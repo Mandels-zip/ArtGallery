@@ -30,6 +30,18 @@
     object-fit: cover;
   }
 
+  .custom-block-edit .poster_image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 552px;
+    height: 680px;
+    border-radius: 20px 0 0 0;
+    object-fit: cover;
+  }
+
+  
+
   .custom-content {
     position: absolute;
     left: 552px;
@@ -162,7 +174,25 @@
   align-items: center;
 }
 
+.comment .button-container {
+  width: auto;
+  height: 104px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: left;
+  background-color: #DC3545; 
+  color: white; 
+  font-weight: bold;
+  border-radius: 0 20px 20px 0;
+}
 
+.comment .button-container .btn {
+  width: auto;
+  height: 104px;
+  color: white; 
+  border-radius: 0 20px 20px 0;
+}
 
 
 
@@ -176,13 +206,33 @@
 }
 
 .your_comment input {
-  width: 1128px;
+  width: 1080px;
   height: 60px;
-  background-color: #f2f2f2; /* Светло-серый цвет фона */
-  border: none; /* Убираем границу */
-  border-radius: 10px; /* Более скругленные углы */
+  background-color: #f2f2f2; 
+  border: none; 
+  border-radius: 10px 0 0 10px; 
   padding: 8px;
-  color: #555;
+  color: #555; 
 }
+
+
+.image-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  background-color: #f2f2f2; 
+  border-radius: 0 10px 10px 0; 
+  height: 60px;
+}
+
+.image-button img {
+  width: 24px; /* Укажите желаемый размер картинки */
+  margin-right: 8px; /* Опциональное расстояние между картинкой и текстом */
+}
+
+
 
 
