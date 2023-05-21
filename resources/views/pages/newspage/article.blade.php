@@ -1,5 +1,5 @@
-@include('\layouts\header')
-        <ul class="list-group col-12"  >
+@include('layouts/header')
+        <ul class="list-group col-12"  >git
           <li class="list-group-item"> {{$news -> title}} </a>
            {{$news -> text}} </b>
            <img src="{{ asset('storage/images/newsimg/'.$news->img)}}" > </img>

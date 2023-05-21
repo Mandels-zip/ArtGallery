@@ -1,0 +1,65 @@
+.your_password {
+    height: 100px;
+  }
+  
+  .your_password input {
+    width: 550px;
+    height: 60px;
+    background-color: #f2f2f2; /* Светло-серый цвет фона */
+    border: none; /* Убираем границу */
+    border-radius: 40px; /* Более скругленные углы */
+    color: #555;
+  }
+
+  .nav-tabs .nav-link[aria-selected="false"] {
+    background-color: #e9ecef; /* Замените на ваш желаемый цвет серого */
+    color: #6c757d; /* Замените на ваш желаемый цвет текста */
+    border-radius: 40px 40px 0 0; /* Замените на ваш желаемый радиус скругления */
+  }
+
+  a.nav-link.nav-underline.active span.text-muted show {
+    color: gray;
+    /* Другие стили для активного состояния */
+  }
+  
+  
+  .profile-image {
+    border: 4px solid black;
+    width: 18rem;
+    }
+    
+    .profile-title {
+        /* стили заголовка */
+      }
+      
+      .profile-email {
+        color: gray;
+      }
+      
+      .profile-image {
+        border: 4px solid black;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        margin-top: 155px;
+      }
+
+      .btn-rounded {
+        border-radius: 50px;
+      }
+
+      .form-check-input {
+        margin-right: 5px; /* Уменьшает отступ справа от чекбокса */
+        width: 20px; /* Задает ширину чекбокса */
+        height: 20px; /* Задает высоту чекбокса */
+        border-radius: 50%; /* Делает чекбокс круглым */
+        border: 2px solid gray; /* Задает границу чекбокса */
+      }
+      
+      .form-check-label {
+        vertical-align: middle; /* Выравнивает текст по вертикали с чекбоксом */
+      }
+
+      .form-check-label {
+        margin-left: 5px; /* Устанавливает отступ слева от надписи */
+      }

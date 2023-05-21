@@ -1,4 +1,4 @@
-@include('\layouts\header')
+@include('layouts/header')
 
 <form method="POST" action="{{route('news.update', $news->id)}}" enctype="multipart/form-data">
     @csrf

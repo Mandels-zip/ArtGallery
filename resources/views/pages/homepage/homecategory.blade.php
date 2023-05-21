@@ -1,18 +1,8 @@
 @include('layouts/header')
-<body>
-  
+
 <div class="category-container">
-    <div class="category">
+    <div class="only-category">
     <img src="{{asset('storage\images\contentimg\photo10.jpg')}}" class="img-fluid" alt="Responsive image">
-    </div>
-
-    <div class="category">
-    </div>
-
-    <div class="category">
-    </div>
-
-    <div class="category">
     </div>
 </div>
 
@@ -28,5 +18,3 @@
 
 </div>
 
-
-</body>
