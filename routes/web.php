@@ -102,3 +102,8 @@ Route::get('/maincategory', function () {
 })->name('maincategory');
 
 
+Route::get('/newspost', function () {
+    return view('pages.newspage.newspost');
+})->name('maincategory');
+
+
