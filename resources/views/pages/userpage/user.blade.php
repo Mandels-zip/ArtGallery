@@ -101,8 +101,6 @@ $chunks = array_chunk($likedpost->toArray(), 2); // convert Collection to array 
   </div>
   <!-- Tabs content -->
 
-
-
   <script>
   $(function() {
     $('#myTab a').on('click', function (e) {

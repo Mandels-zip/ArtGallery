@@ -8,7 +8,7 @@ use App\Http\Controllers\HomeController;
 use illuminate\support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+Use App\Models\User;
 
 class ContentController extends Controller
 {
@@ -22,7 +22,8 @@ class ContentController extends Controller
     {
         $content = Content::findOrFail($id);
         $comments = $content->comment;
-        return view('pages.contentpage.contentDetail', compact('content', 'comments'));
+        $user = User::find($content->userId);
+        return view('pages.contentpage.contentDetail', compact('content', 'comments', 'user'));
    }
    
    public function store(Request $request){

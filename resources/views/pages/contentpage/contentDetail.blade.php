@@ -1,76 +1,125 @@
 @include('\layouts\header')
-<body>
-      <div class="col-md-4">
-        <h2>{{$content ->title }} </h2>
-        <ul class="list-group col-12"  >
-          <li class="list-group-item">
-         <li class="me-3 mb-3">
-       
-        @guest
-     
-        <p><i class="fas fa-heart fa-lg" style="color: #636363;"></i> </p>
-        </b>
-        <textarea disabled>  You are not registered</textarea>
-        @endguest
 
-        @if (Auth::check())
+<link rel="stylesheet" href="{{ asset('css/post.css') }}">
+<body>
+  <div class="container custom-block-edit">
+    <img src="{{asset('storage/images/contentimg/'.$content->img)}}" class="img-fluid poster_image" alt="Responsive image">
+
+    <div class="custom-content d-flex align-items-center justify-content-center text-center">
+      <h1>{{$content ->title}}
+      </h1>
+    </div>
+
+    <div class="small-content custom-content d-flex align-items-center justify-content-center text-center">
+      <h3>by:</h3>
+      <div class="mini-avatar">
+        <img class="rounded rounded-circle" src="{{asset('storage/images/avatar/'. $user->avatar)}}" alt="...">
+      </div>
+      <div class="mini-nickname">
+      <h2>{{$user->nickname}}</h2>
+      </div>
+    </div>
+
+    <div class="inner">
+      <p style="padding-left: 30px; padding-right: 30px; padding-top: 30px; font-size: 32px;">{{$content->description}}  
+
+      @if (Auth::check())
           @if ($content->like()->where('UserId', Auth::user()->id)->exists())
         <form action="{{ route('like.toggle', ['contentId' => $content->id]) }}" method="POST">
           @csrf
-        
           <button type="submit"  class="btn btn-lg like-button"> <i class="fas fa-heart fa-lg"> </i> </button>
         </form>
          @else(Auth::check())
-         
          <form action="{{ route('like.toggle', ['contentId' => $content->id]) }}" method="POST">
          @csrf
          <button type="submit"  class="btn btn-lg like-button "> <i class="far fa-heart fa-lg"> </i> </button>
         </form>
 
          @endif
-        <form action="{{route ('comment.create', ['contentId' => $content->id]) }}" method="POST">
-          @csrf
-          <div class="mb-3">
-          <label for="body" class="form-label">Write your review</label>
-          <textarea class="form-control border auto-resize" style="height: auto; overflow: hidden; resize: none;" id="body" name="body" rows="3"></textarea>
-          <button type="submit" class="btn "> Comment</button>
-          </div>
-        </form>
+      @endif</p>
+    </div>
+  </div>
 
-
-         @endif
-    
-      </a>
-          </li>
-          @if(Auth::check())
+  @if(Auth::check())
            @if($content-> userId == Auth::User()->id || Auth::User()->role == 'admin' ||  Auth::user()->role == 'moderator' )
-          <form action="{{route('destroy.content', ['contentId' => $content->id])}}" method="POST">
+
+  <div class="container d-flex justify-content-center">
+    <div class="row">
+      <div class="col-md-12">
+
+      <div class="button-container">
+      <form action="{{route('destroy.content', ['contentId' => $content->id])}}" method="POST" >
             @csrf
             @method('DELETE')
-           <button type="submit" class="btn btn-outline-danger"> Delete </button> 
-          </form>
-          @endif
-          @endif
+        <button type="submit" class="btn btn-danger btn-block" style="font-size: 32px;">DELETE
+        </button>
+      </form>
+      </div>
 
-          @foreach ($comments as $comment)
-          <div class="card">
-              <div class="card-body">
-                  <p class="card-text">{{ $comment->body }}</p>
-                 
-                  <p class="card-text"><small class="text-muted">Posted by <a href="{{route('user.page', ['nickname' => $comment->user->nickname]) }}">{{ $comment->user->nickname }}</a> in {{ $comment->created_at->format('F j, Y') }}</small></p>
-                 @if (Auth::check())
-                 @if ($content->comment()->where('UserId', Auth::user()->id)->exists() || Auth::user()->role == 'admin' ||  Auth::user()->role == 'moderator')
-                <form action="{{route('comment.destroy', ['commentId' => $comment->id])}}" method="POST">
+      </div>
+    </div>
+  </div>
+
+  @endif
+  @endif
+  <div class="comments-container">
+  <h2>Comments</h2>
+  </div>
+
+  @if(Auth::Check())
+  <form action="{{route ('comment.create', ['contentId' => $content->id]) }}" method="POST">
+    @csrf
+    <div class="your_comment">
+      <input type="text" placeholder="add your comment" name="body">
+      <button type="submit" class="image-button">
+        <img class="" src="{{asset('storage\images\send.png')}}" alt="...">
+      </button>
+    </div>
+  </form>
+  @endif
+
+  @foreach ($comments as $comment)
+  <div class="comment d-flex flex-row mb-3">
+    <div class="avatar p-2">
+    <a href="{{route('user.page', ['nickname' => $comment->user->nickname]) }}"><img class="rounded rounded-circle" src="{{ asset('storage/images/avatar/'.$comment->user->avatar) }}" alt="..."></a>
+    </div>
+
+    <div class="username p-2">
+      <p>{{$comment->user->nickname}}:</p>
+    </div>
+    
+    <div class="is_comment p-2">
+      <p>{{ $comment->body }}</p>
+    </div>
+
+    
+    <div class="button-container">
+    @if (Auth::check())
+    @if ($comment->userId == Auth::User()->id || Auth::user()->role == 'admin' ||  Auth::user()->role == 'moderator')
+    <form action="{{route('comment.destroy', ['commentId' => $comment->id])}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
-                </form>
-                @endif
-                @endif
-              </div>
-          </div>
-          @endforeach
+      <button type="submit" class="btn">X</button>
+      </form>
+      @endif
+    @endif
+    </div>
+   
+  </div> 
+  @endforeach
 
-          
-      </div>
+
+  @guest    
+  <div class="your_comment">
+    <input type="text" placeholder="you are not registered" disabled>
+  </div>>
+  @endguest
+
+  </body>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
+</html>

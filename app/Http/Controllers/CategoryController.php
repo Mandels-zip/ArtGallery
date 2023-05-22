@@ -27,6 +27,7 @@ class CategoryController extends Controller
     return view('pages.contentpage.contentByCategory', [
         'content' => $content,
         'categoryName' => $category->name,
+        'categoryImg' => $category->img
     ]);
    }
 

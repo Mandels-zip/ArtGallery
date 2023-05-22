@@ -74,36 +74,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/categories/create', [CategoryController::class, 'create'])-> name('category.create');
     Route::post('/categories/store', [CategoryController::class, 'store'])->name('category.store');
     Route::delete('/category/{id}', [CategoryController::class, 'destroy']) ->name('category.destroy');
+    Route::put('/change/role', [UserController::class, 'changeRole']) -> name('change.role');
 });
-
-
-Route::get('/post', function () {
-    return view('pages.postpage.post');
-})->name('post');
-
-Route::get('/post_edit', function () {
-    return view('pages.postpage.postedit');
-})->name('postedit');
-
-Route::get('/auhor_name', function () {
-    return view('pages.authorpage.author');
-})->name('author');
-
-Route::get('/auhor_edit', function () {
-    return view('pages.authorpage.author_edit');
-})->name('author_edit');
-
-Route::get('/main', function () {
-    return view('pages.mainpage.main');
-})->name('main');
-
-Route::get('/maincategory', function () {
-    return view('pages.homepage.homecategory');
-})->name('maincategory');
-
-
-Route::get('/newspost', function () {
-    return view('pages.newspage.newspost');
-})->name('maincategory');
-
 

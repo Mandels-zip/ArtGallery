@@ -58,9 +58,8 @@ class UserController extends Controller
         $user = User::where('nickname', $nickname)->first(); 
         $age = Carbon::parse($user->date_of_birth)->diffInYears(Carbon::now());
         $roles = array(
-            1 => 'admin',
-            2 => 'moderator',
-            3 => 'user'
+            1 => 'moderator',
+            2 => 'user'
         );
          return view ('pages.userpage.usersettings', compact('user', 'viewData', 'age', 'roles'));
         }
@@ -130,8 +129,16 @@ class UserController extends Controller
         if(Auth::User()->role != 'admin'){
             return redirect()->back()->with('Error', 'You have no access');
         }
-        
 
+        $validatedData = $request->validate([
+            'id' => 'required',
+            'role' => 'required|string',
+        ]);
+        
+        $user = User::Find($validatedData['id']);
+        $user -> role = $validatedData['role'];
+        $user ->save();
+        return redirect()->back()->with('Right', 'role is changed');
      }
 
     }

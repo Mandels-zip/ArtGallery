@@ -1,73 +1,44 @@
 @include('layouts/header')
 <body>
-  
+
 <div class="category-container">
+
     <div class="category-wrapper">
+    @if(Auth::check() &&(Auth::user()->role == 'admin'))
+          <a href="{{route('category.create')}}" type="button" class="btn btn-success" > Create Category </a>
+@endif
+        @foreach($categories as $category)
         <div class="category">
-            <img src="{{asset('storage/images/contentimg/photo10.jpg')}}" alt="Описание изображения">
+         <a href="{{route('sort.category', ['categoryId' => $category->id]) }}">
+            <img src="{{asset('storage/images/categoryimg/' . $category->img)}}" alt="Описание изображения">
+        
             <div class="category-overlay">
-                <p class="category-text">Anime</p>
+                <p class="category-text">{{$category->name}}</p>
+                <p> @if(Auth::Check() && Auth::user()->role == 'admin')
+                    <form action="{{ route('category.destroy', $category->id, ) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-outline-danger"> Delete Category </button> 
+                    </form>
+                @endif</p>
             </div>
+            
+            
         </div>
-
-        <div class="category">
-            <img src="{{asset('storage/images/contentimg/photo10.jpg')}}" alt="Описание изображения">
-            <div class="category-overlay">
-                <p class="category-text">Sci-fi</p>
-            </div>
-        </div>
-
-        <div class="category">
-            <img src="{{asset('storage/images/contentimg/photo10.jpg')}}" alt="Описание изображения">
-            <div class="category-overlay">
-                <p class="category-text">Fantasy</p>
-            </div>
-        </div>
-
-        <div class="category">
-            <img src="{{asset('storage/images/contentimg/photo10.jpg')}}" alt="Описание изображения">
-            <div class="category-overlay">
-                <p class="category-text">StreetArt</p>
-            </div>
-        </div>
-
-        <!-- Дополнительные категории -->
-        <div class="category">
-            <img src="{{asset('storage/images/contentimg/photo10.jpg')}}" alt="Описание изображения">
-            <div class="category-overlay">
-                <p class="category-text">Category 5</p>
-            </div>
-        </div>
-
-        <div class="category">
-            <img src="{{asset('storage/images/contentimg/photo10.jpg')}}" alt="Описание изображения">
-            <div class="category-overlay">
-                <p class="category-text">Category 6</p>
-            </div>
-        </div>
-
-        <div class="category">
-            <img src="{{asset('storage/images/contentimg/photo10.jpg')}}" alt="Описание изображения">
-            <div class="category-overlay">
-                <p class="category-text">Category 7</p>
-            </div>
-        </div>
-
-        <div class="category">
-            <img src="{{asset('storage/images/contentimg/photo10.jpg')}}" alt="Описание изображения">
-            <div class="category-overlay">
-                <p class="category-text">Category 8</p>
-            </div>
-        </div>
+</a>
+        @endforeach
     </div>
 </div>
 
 <div class="general-container">
+@foreach ($content as $cont)
     <div class="general-item">
-        <img src="{{asset('storage/images/contentimg/photo1.jpg')}}" class="img-fluid" alt="Описание изображения">
+    <a href="{{route('content.details', ['id' => $cont->id]) }}"><img src="{{asset('storage/images/contentimg/'. $cont->img)}}" class="img-fluid" alt="Описание изображения">
         <div class="content">
+            
         </div>
     </div>
+    @endforeach
 </div>
 
 </body>

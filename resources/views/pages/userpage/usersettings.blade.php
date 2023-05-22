@@ -46,10 +46,12 @@
 
           <hr>
           <p>OR </p>
+          @if($age < 18)
           <small id="input-help" class="form-text text-muted mb-3" >You should be 18 years old </small>
+          @endif
         <div class="form-check form-switch">
         <label class="form-check-label" for="enable_explicit">Allow the explicit content</label>
-          <input class="form-check-input" value="1" type="checkbox" name="enable_explicit" id="enable_explicit" {{ $user->enable_explicit == 1 && $age >= 18 ? 'checked' : ''}}>
+          <input class="form-check-input" value="1" type="checkbox" name="enable_explicit" id="enable_explicit" {{ $user->enable_explicit == 1 && $age >= 18 ? 'checked' : ''}} {{ $age < 18 ? 'disabled' : '' }}>
         </div>
         @error('enable_explicit')
                 <span role="alert">
@@ -64,7 +66,7 @@
       @endif
 
       @if($user->id == Auth::User()->id || Auth::User()->role == 'admin' ||  Auth::user()->role == 'moderator' )
-          <form class="d" action="{{route('destroy.user', ['id' => $user->id])}}" method="POST">
+          <form class="" action="{{route('destroy.user', ['id' => $user->id])}}" method="POST">
             @csrf
             @method('DELETE')
            <button type="submit" class="btn btn-outline-danger"> Delete Account </button>     
@@ -72,7 +74,7 @@
           @endif
 
       @if(Auth::User()->role == 'admin' && $user->role != 'admin')
-      <form class="d" action="" method="POST">
+      <form action="{{route('change.role')}}" method="POST">
       @csrf 
       @method('PUT')
       <select class="form-control w-25 p-3" id="role" name="role" required>
@@ -80,8 +82,11 @@
        <option value="{{$role}}">{{$role}}</option>
        @endforeach
       </select>
+      <input type="hidden" name="id" value="{{$user->id}}">
        <button type="submit" class="btn btn-outline-danger">Change role</button>
       </form>
+
+      {{$user->role}}
       @endif
       
 
