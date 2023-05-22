@@ -50,6 +50,9 @@
 
   <div class="your_comment">
     <input type="text" placeholder="add your comment">
+    <button class="image-button">
+      <img class="" src="{{asset('storage\images\contentimg\send.png')}}" alt="...">
+    </button>
   </div>
 
   </body>

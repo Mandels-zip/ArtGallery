@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/post.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/author.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/general.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/news.css') }}">
     
   
     <header>
@@ -24,9 +25,7 @@
     <div class="d-flex align-items-center">
       <a class="navbar-brand me-auto" href="/" >Home</a>
       <a class="btn me-3" type="button" href="/news" >News</a>
-      <a class="btn me-3" type="button" href="{{ route('post') }}" >post</a>
-      <a class="btn me-3" type="button" href="{{ route('author') }}" >author</a>
-      <a class="btn me-3" type="button" href="{{ route('main') }}" >main</a>
+
 </div>
 @if($viewData['enable_search'] ?? true)
       <form>

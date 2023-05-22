@@ -100,3 +100,5 @@ Route::get('/main', function () {
 Route::get('/maincategory', function () {
     return view('pages.homepage.homecategory');
 })->name('maincategory');
+
+
