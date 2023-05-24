@@ -1,6 +1,7 @@
 @include('layouts/header')
 
 <body>
+<div class="container">
 @if(Auth::check() &&(Auth::user()->role == 'admin' ||  Auth::user()->role == 'moderator' ))
           </a> <a href="{{route('news.create')}}" type="button" class="btn btn-success" > Create </a></li>
         @endif
@@ -9,9 +10,9 @@
 @foreach ($news as $article)
 <div class="newsblock">
   <div class="picture"> </div>
-  <div class="date">Published date: {{$article->post_date}}2</div>
   <div class="title"><a href="{{route('news.article', ['news'=> $article->id])}}" style="text-decoration: none; color: inherit;">{{$article -> title}}</a></div>
   <div class="descript">{{$article->text}}</div>
+  <div class="date">Published date: {{$article->post_date}}2</div>
   <div class="buttons">
   @if(Auth::check() &&(Auth::user()->role == 'admin' ||  Auth::user()->role == 'moderator' ))
         <form action="{{ route('news.destroy', $article->id, ) }}" method="POST">
@@ -27,4 +28,5 @@
   </div>
 </div>
 @endforeach
+</div>
 </body>
