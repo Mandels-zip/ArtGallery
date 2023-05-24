@@ -28,7 +28,7 @@ Route::get('/login')->middleware('role');
 //FOR EVERYONE
 Route::get('/', [HomeController::class, 'index']) -> name('home');
 Route::get('/news',[NewsController::class, 'index'])->name('news');
-Route::get('/details/{id}',[ContentController::class, 'contentDetail']) ->name('content.details') -> middleware('check.explicit');
+Route::get('/details/{id}',[ContentController::class, 'contentDetail']) ->name('content.details');
 Route::get('/category/{categoryId}',[CategoryController::class, 'sortByCategory']) ->name('sort.category');
 Route::get('/article/{news}',[NewsController::class, 'article'])-> name('news.article');
 Route::get('/user/{nickname}', [UserController::class, 'personalPage']) -> name('user.page');

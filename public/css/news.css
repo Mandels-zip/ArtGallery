@@ -8,8 +8,6 @@
 
 }
 
-
-
 .newsblock {
   width: 840px;
   height: 440px;
@@ -51,6 +49,11 @@
   align-items: center;
   justify-content: center;
   font-size: 18px;
+  
+}
+
+.title:hover{
+  color: gray;
 }
 
 .descript {
