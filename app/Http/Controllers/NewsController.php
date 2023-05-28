@@ -97,10 +97,10 @@ class NewsController extends Controller
             
             $news->save();
 
-            return redirect()->route('personal.page')->with('success', 'User updated successfully.');
+            return redirect()->route('news')->with('success', 'User updated successfully.');
 
     } else {
-        return redirect()->route('personal.page')->with('error', 'You do not have permission to update this news article.');
+        return redirect()->route('news')->with('error', 'You do not have permission to update this news article.');
     }
     }
     

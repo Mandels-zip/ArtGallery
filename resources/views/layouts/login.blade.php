@@ -86,7 +86,7 @@
 
         <div class="mb-3">
           <label for="nickname" class="form-label">Nickname</label>
-          <input type="input" class="form-control" id="nickname" name="nickname">
+          <input type="input" class="form-control" id="nickname" name="nickname" required>
         </div>
         @error('nickname')
                 <span role="alert">
@@ -132,7 +132,7 @@
         </div>
         <div class= "mb-3">
           <label class="form-label" for="number">Date of birth </label>
-          <input type="date" class="form-control flatpickr" name="date_of_birth" id="date_of_birth" placeholder="YYYY-MM-DD">
+          <input type="date" class="form-control flatpickr" name="date_of_birth" id="date_of_birth" placeholder="YYYY-MM-DD" required>
           <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
           <script>
             flatpickr("#date_of_birth", {

@@ -49,7 +49,7 @@
         {{ Auth::user()->nickname }}
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="{{route('user.page', ['nickname' => Auth::User()->nickname])}}">dashboard</a></li>
+        <li><a class="dropdown-item" href="{{route('user.page', ['nickname' => Auth::User()->nickname])}}">Personal page</a></li>
         <li><form method="POST" action="{{ route('logout')}}">
           @csrf
         <button type="submit" class="dropdown-item" >Logout</button>
