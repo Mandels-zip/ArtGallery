@@ -44,17 +44,12 @@
     @endguest
 
     @if(Auth::check())
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        {{ Auth::user()->nickname }}
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="{{route('user.page', ['nickname' => Auth::User()->nickname])}}">Personal page</a></li>
-        <li><form method="POST" action="{{ route('logout')}}">
+    <div class="d-flex align-items-center me-2">      
+      <button class="btn btn-dark btn-sm me-2"><a class="link-light" href="{{route('user.page', ['nickname' => Auth::User()->nickname])}}"> {{ Auth::user()->nickname }}</a></button>
+      <form method="POST" action="{{ route('logout')}}">
           @csrf
-        <button type="submit" class="dropdown-item" >Logout</button>
-        </form></li>
-      </ul>
+        <button type="submit" class="btn btn-dark btn-sm" >Logout</button>
+        </form>
     </div>
     @endif
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Content;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -46,7 +46,7 @@ class CategoryController extends Controller
 
      $category->name = $validatedData['name'];
         $filename = time() . '_' . $request->file('img')->getClientOriginalName();
-        $request->file('img')->storeAs('public/images/categoryimg', $filename);
+        $request->file('img')->storeAs('images/categoryimg', $filename, 'public');
         $category->img = $filename;
         
 
@@ -63,7 +63,7 @@ public function destroy($id){
         return redirect()->back()->with('error', 'Category not found');
     }
 
-    Storage::delete('public/images/categoryimg/'.$category->img);
+    File::delete(public_path('storage/images/categoryimg/'.$category->img));
     $category->delete();
     return redirect()->route('home')->with('success', 'Category deleted successfully');
 }

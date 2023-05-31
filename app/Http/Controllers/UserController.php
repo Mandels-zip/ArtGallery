@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Content;
 use App\Models\Category;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
@@ -70,7 +70,10 @@ class UserController extends Controller
 
         if($request->has('avatar')) {
             $filename = time() . '_' . $request->file('avatar')->getClientOriginalName();
-            $request->file('avatar')->storeAs('public/images/avatar/', $filename);
+            if($filename != 'blank.png'){
+                File::delete(public_path('storage/images/avatar/'.$user->avatar));
+            }
+            $request->file('avatar')->storeAs('images/avatar/', $filename, 'public');
             $user->avatar =$filename;
         }
 
@@ -113,7 +116,7 @@ class UserController extends Controller
         }
 
         foreach( $user-> content as $cont ){
-        Storage::delete('public/images/contentimg/'.$cont->img);
+            File::delete(public_path('storage/images/contentimg/'.$cont->img));
         }
        
         $user->content()->delete();

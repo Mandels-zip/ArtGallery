@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 
 class NewsController extends Controller
@@ -43,7 +43,7 @@ class NewsController extends Controller
          $news->UserId = $user->id;
         
             $filename = time() . '_' . $request->file('img')->getClientOriginalName();
-            $request->file('img')->storeAs('public/images/newsimg', $filename);
+            $request->file('img')->storeAs('images/newsimg', $filename, 'public');
             $news->img = $filename;
             
 
@@ -60,7 +60,7 @@ class NewsController extends Controller
             return redirect()->back()->with('error', 'News not found');
         }
 
-        Storage::delete('public/images/newsimg/'.$news->img);
+        File::delete(public_path('storage/images/newsimg/'.$news->img));
         $news->delete();
         return redirect()->route('news')->with('success', 'News deleted successfully');
     }
@@ -90,9 +90,9 @@ class NewsController extends Controller
          $news->text = $validatedData['text'];
          $news->UserId = $user->id;
 
-         Storage::delete('public/images/newsimg/' . $news->img);
+         File::delete(public_path('storage/images/newsimg/'.$news->img));
             $filename = time() . '_' . $request->file('img')->getClientOriginalName();
-            $request->file('img')->storeAs('public/images/newsimg', $filename);
+            $request->file('img')->storeAs('images/newsimg', $filename, 'public');
             $news->img = $filename;
             
             $news->save();

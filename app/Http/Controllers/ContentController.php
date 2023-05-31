@@ -7,7 +7,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use illuminate\support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 Use App\Models\User;
 
 class ContentController extends Controller
@@ -38,7 +38,7 @@ class ContentController extends Controller
 
       $userid = Auth::User()->id;
       $filename = time() . '_' . $request->file('img')->getClientOriginalName();
-      $request->file('img')->storeAs('public/images/contentimg', $filename);
+      $request->file('img')->storeAs('images/contentimg', $filename, 'public');
 
       $content = Content::create([
       'title' =>$validatedData['title'],
@@ -70,7 +70,7 @@ class ContentController extends Controller
          return redirect()->back()->with('error', 'You have no right');
       }else{
          
-      Storage::delete('public/images/contentimg/'.$content->img);
+      File::delete(public_path('storage/images/contentimg/'.$content->img));
       $content->delete();
       return redirect()->route('home')->with('success', 'News deleted successfully');
    }
