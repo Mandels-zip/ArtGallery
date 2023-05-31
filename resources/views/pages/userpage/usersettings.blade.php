@@ -77,11 +77,12 @@
       <form action="{{route('change.role')}}" method="POST">
       @csrf 
       @method('PUT')
-      <select class="form-control w-25 p-3" id="role" name="role" required>
+      <select class="form-control" id="role" name="role" required>
        @foreach($roles as $role)
        <option value="{{$role}}">{{$role}}</option>
        @endforeach
       </select>
+
       <input type="hidden" name="id" value="{{$user->id}}">
        <button type="submit" class="btn btn-outline-danger">Change role</button>
       </form>
